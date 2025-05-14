@@ -2,6 +2,15 @@
 
 Esta aplicación utiliza Kafka para procesar datos de criptomonedas desde Binance y visualizarlos en tiempo real con React.
 
+## Estructura del Proyecto
+
+- `server.js`: Servidor Express + WebSocket + Consumidor de Kafka
+- `consumer.js`: consumidor otro extra
+- `binance-ws.js`: Cliente WebSocket que se conecta a Binance y envía datos a Kafka
+- `producer.js`: Productor de Kafka que recibe datos de Binance
+- `setup.js`: Script para configurar el tema de Kafka
+- `client/`: Aplicación React con Vite y Tailwind CSS para visualizar los datos
+
 ## Requisitos
 
 - Docker y Docker Compose
@@ -25,13 +34,13 @@ cd ..
 
 ## Iniciar Kafka
 
-1. Inicia Kafka y Zookeeper con Docker Compose:
+1. Inicia el broker Redpanda (compatible con Kafka) con Docker Compose:
 
 ```bash
 docker-compose up -d
 ```
 
-2. Verifica que los contenedores estén funcionando:
+2. Verifica que el contenedor esté funcionando:
 
 ```bash
 docker-compose ps
