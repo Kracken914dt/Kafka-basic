@@ -1,0 +1,21 @@
+services:
+  redpanda:
+    image: redpandadata/redpanda:latest
+    container_name: redpanda
+    ports:
+      - "9092:9092"
+      - "9644:9644"
+    environment:
+      - REDPANDA_RPC_SERVER_LISTEN_ADDR=0.0.0.0
+      - REDPANDA_SEED_SERVERS=[]
+      - REDPANDA_KAFKA_ADDRESS=0.0.0.0:9092
+      - REDPANDA_ADVERTISED_KAFKA_ADDR=localhost:9092
+    command:
+      - redpanda
+      - start
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --overprovisioned
+      - --node-id=0
+      - --check=false 
