@@ -25,25 +25,27 @@ const PriceDisplay = ({ price, time, symbol }) => {
 
   // Dirección del precio para cambiar el color
   const directionClasses = {
-    up: 'text-green-500',
-    down: 'text-red-500',
+    up: 'text-green-500 animate-pulse',
+    down: 'text-red-500 animate-pulse',
     null: 'text-gray-800'
   };
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-md">
-      <h2 className="text-xl font-bold mb-4 text-gray-800">Precio Actual</h2>
+    <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-8 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b border-gray-200 pb-3">Precio Actual</h2>
       
       <div className="text-center">
-        <div className="mb-3">
-          <h3 className="text-2xl font-bold">{symbol || 'BTC/USDT'}</h3>
+        <div className="mb-4">
+          <h3 className="text-3xl font-bold bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
+            {symbol || 'BTC/USDT'}
+          </h3>
         </div>
         
-        <div className={`text-4xl font-bold ${directionClasses[priceDirection]}`}>
+        <div className={`text-5xl font-bold ${directionClasses[priceDirection]} transition-colors duration-300`}>
           {price ? price : '----.--'}
         </div>
         
-        <div className="text-gray-500 mt-2">
+        <div className="text-gray-500 mt-4 text-lg font-medium">
           {time ? time : '--:--:--'}
         </div>
       </div>
