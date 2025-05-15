@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
+import { HiArrowNarrowRight, HiArrowNarrowLeft } from 'react-icons/hi';
 
-const KafkaDiagram = ({ queueSize, topic, partition }) => {
+const KafkaDiagram = ({ queueSize, topic, partition, totalPartitions }) => {
   const [dataPoints, setDataPoints] = useState([]);
   const dataFlowRef = useRef(null);
 
@@ -43,8 +44,8 @@ const KafkaDiagram = ({ queueSize, topic, partition }) => {
         </div>
         
 
-        <div className="absolute h-[12px] w-[60px] bg-gradient-to-r from-gray-700 to-gray-800 top-[140px] left-[180px] rounded-r-full">
-          <div className="absolute w-0 h-0 border-[12px] border-transparent border-l-gray-800 -right-[12px] -top-[6px]"></div>
+        <div className="absolute h-[20px] w-[64px] top-[128px] left-[180px] flex items-center justify-center">
+          <HiArrowNarrowRight className="w-14 h-16 text-slate-800" />
         </div>
         
 
@@ -56,8 +57,8 @@ const KafkaDiagram = ({ queueSize, topic, partition }) => {
         </div>
         
 
-        <div className="absolute h-[12px] w-[60px] bg-gradient-to-r from-gray-700 to-gray-800 top-[140px] right-[180px] rounded-l-full">
-          <div className="absolute w-0 h-0 border-[12px] border-transparent border-r-gray-800 -left-[12px] -top-[6px]"></div>
+        <div className="absolute h-[20px] w-[64px] top-[128px] right-[180px] flex items-center justify-center">
+          <HiArrowNarrowLeft className="w-14 h-16 text-slate-800" />
         </div>
         
 
@@ -84,8 +85,12 @@ const KafkaDiagram = ({ queueSize, topic, partition }) => {
             <span className="font-mono bg-gray-100 px-2 py-1 rounded">{topic || 'crypto-prices'}</span>
           </li>
           <li className="flex items-center space-x-2">
-            <span className="text-gray-600">Partición:</span>
+            <span className="text-gray-600">Partición actual:</span>
             <span className="font-mono bg-gray-100 px-2 py-1 rounded">{partition || '0'}</span>
+          </li>
+          <li className="flex items-center space-x-2">
+            <span className="text-gray-600">Total de particiones:</span>
+            <span className="font-mono bg-blue-100 text-blue-800 px-2 py-1 rounded">{totalPartitions || '3'}</span>
           </li>
           <li className="flex items-center space-x-2">
             <span className="text-gray-600">Mensajes en cola:</span>

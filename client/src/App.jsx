@@ -3,7 +3,8 @@ import { io } from 'socket.io-client';
 import KafkaDiagram from './components/KafkaDiagram';
 import PriceChart from './components/PriceChart';
 import PriceDisplay from './components/PriceDisplay';
-
+import PartitionView from './components/PartitionView';
+import PerformanceMetrics from './components/PerformanceMetrics';
 
 function App() {
   const [priceData, setPriceData] = useState({
@@ -18,6 +19,7 @@ function App() {
   });
   const [priceHistory, setPriceHistory] = useState([]);
   const [connected, setConnected] = useState(false);
+  const [numPartitions, setNumPartitions] = useState(3);
   
   useEffect(() => {
     // Conectar al servidor WebSocket
@@ -81,6 +83,10 @@ function App() {
     };
   }, []);
 
+  const handlePartitionsChange = (newNumPartitions) => {
+    setNumPartitions(newNumPartitions);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
@@ -98,7 +104,23 @@ function App() {
         <KafkaDiagram 
           queueSize={queueStatus.size} 
           topic={queueStatus.topic} 
-          partition={queueStatus.partition} 
+          partition={queueStatus.partition}
+          totalPartitions={numPartitions}
+        />
+      </div>
+
+      <div className="mb-8">
+        <PartitionView 
+          messages={priceHistory}
+          numPartitions={numPartitions}
+          onPartitionsChange={handlePartitionsChange}
+        />
+      </div>
+
+      <div className="mb-8">
+        <PerformanceMetrics 
+          numPartitions={numPartitions}
+          messages={priceHistory}
         />
       </div>
 
